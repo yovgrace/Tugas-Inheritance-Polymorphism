@@ -1,0 +1,68 @@
+# =============================================
+# Program: Sistem Manajemen Karyawan
+# Konsep: Inheritance & Polymorphism
+# Dibuat oleh: Yovitha
+# =============================================
+
+# ---- Parent Class ----
+class Karyawan:
+    def __init__(self, nama, id_karyawan, gaji_pokok):
+        # Inisialisasi atribut dasar karyawan
+        self.nama = nama
+        self.id_karyawan = id_karyawan
+        self.gaji_pokok = gaji_pokok
+
+    def hitung_gaji(self):
+        # Mengembalikan gaji pokok karyawan
+        return self.gaji_pokok
+
+    def info(self):
+        # Mengembalikan informasi umum tentang karyawan
+        return f"Karyawan : {self.nama}, ID: {self.id_karyawan}, Gaji: {self.hitung_gaji()}"
+
+
+# ---- Child Class: Manager ----
+class Manager(Karyawan):
+    def __init__(self, nama, id_karyawan, gaji_pokok, tunjangan):
+        # Memanggil constructor dari parent class menggunakan super()
+        super().__init__(nama, id_karyawan, gaji_pokok)
+        # Menambahkan atribut baru khusus untuk manager
+        self.tunjangan = tunjangan
+
+    def hitung_gaji(self):
+        # Override method: menambahkan tunjangan ke gaji pokok
+        return self.gaji_pokok + self.tunjangan
+
+    def info(self):
+        # Override method: menampilkan info manager secara lengkap
+        return f"Manager : {self.nama}, ID: {self.id_karyawan}, Gaji: {self.hitung_gaji()}"
+
+
+# ---- Child Class: Programmer ----
+class Programmer(Karyawan):
+    def __init__(self, nama, id_karyawan, gaji_pokok, bonus):
+        # Memanggil constructor parent class
+        super().__init__(nama, id_karyawan, gaji_pokok)
+        # Menambahkan atribut baru khusus untuk programmer
+        self.bonus = bonus
+
+    def hitung_gaji(self):
+        # Override method: menambahkan bonus ke gaji pokok
+        return self.gaji_pokok + self.bonus
+
+    def info(self):
+        # Override method: menampilkan info programmer secara lengkap
+        return f"Programmer : {self.nama}, ID: {self.id_karyawan}, Gaji: {self.hitung_gaji()}"
+
+
+# ---- Program Utama ----
+if __name__ == "__main__":
+    # Membuat objek Manager dengan data contoh
+    m = Manager("Yovitha", "M002", 12000000, 3000000)
+
+    # Membuat objek Programmer dengan data contoh
+    p = Programmer("Gracia", "P002", 9000000, 2500000)
+
+    # Menampilkan informasi masing-masing karyawan
+    print(m.info())
+    print(p.info())
